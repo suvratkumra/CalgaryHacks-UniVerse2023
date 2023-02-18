@@ -6,7 +6,6 @@ import dotenv from "dotenv";
 import multer from "multer";
 import helmet from "helmet";
 import morgan from "morgan";
-import patth from "path";
 import { fileURLToPath } from "url";
 import path from "path";
 // register endpoint
@@ -59,6 +58,13 @@ auth route = upload picture directly into assests folder (middleware)
 DO NOT MOVE AUTH ROUTE INTO ROUTE FILE NEED UPLOAD VARIABLE 
 */
 app.post("/auth/register", upload.single("picture"), register);
+
+/*ROUTER
+------------- 
+setup routes for authorization routes endpoints
+*/
+app.use("/auth", authRoutes);
+
 /*
 MONGOOSE SETUP 
 ---------------
