@@ -5,6 +5,6 @@ The project based on Topic 2
 
 ## Our team members
 - Anay Bhutoria 
-- Gaurick Kooner
-- Nav **(Complete this when you get time)**
+- Gurick Kooner
+- Navjot Saran
 - Suvrat Kumra
