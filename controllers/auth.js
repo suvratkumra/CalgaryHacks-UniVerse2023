@@ -52,6 +52,9 @@ gets email and password from request body
 query db to find that user
 check if exists
 check if hashed passwords match
+
+create jwt token
+del user pass so it does not get sent back t front end 
 */
 export const login = async (req, res) => {
 	try {
@@ -61,6 +64,9 @@ export const login = async (req, res) => {
 
 		const isMatch = await bcrypt.compare(password, user.password);
 		if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
+		const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+		delete user.password;
+		res.status(200).json({ token, user });
 	} catch (err) {
 		res.status(500).json({ error: err.message });
 	}
