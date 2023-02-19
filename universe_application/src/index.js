@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import Chat from './Pages/Chat/Chat';
 import Login from './Components/Login/Login'
+import AuthPage from './Components/Authentication/Authentication';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login/>
+  },
+  {
+    path: "/register",
+    element: <AuthPage/>
   }
 ]);
 
