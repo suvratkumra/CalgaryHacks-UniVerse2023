@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import "./Login.css"
 import logo from "../../logo.png"
+import Geolocation from '../Geolocation'
+import ChatMessages from '../ChatRoom/ChatRoom.js'
 
 export default function Login() {
     const [emailID, setEmailID] = useState('');
@@ -67,8 +69,8 @@ export default function Login() {
                         </label>
                     </div>    
                 </form>
-              
             </div>
+            <ChatMessages/>
         </div>
     )
 }
