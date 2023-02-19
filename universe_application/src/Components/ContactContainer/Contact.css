@@ -1,0 +1,31 @@
+.mainContactContainer
+{
+    flex:0.7;
+    background-color: black;
+    height: 100vh;
+}
+
+.searchbarforcontact
+{
+    width: 18pc;
+    height: 5vh;
+    border-radius: 10px;
+    border: none;
+}
+
+.userContainer
+{
+    display: flex;
+    background-color: green;
+    padding: 10px 20px;
+    margin: 20px;
+    max-width: 20%;
+}
+
+.userDetail
+{
+    color:white;
+    text-align: start;
+    margin-top: 10px;
+    font-size: 15px;
+}

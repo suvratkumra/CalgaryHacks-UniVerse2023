@@ -1,6 +1,6 @@
 import React from 'react'
-import Chatcontainer from '../../Components/Chatcontainer'
-import Contact from '../../Components/Contact'
+import Chatcontainer from '../../Components/ChatContainer/Chatcontainer'
+import Contact from '../../Components/ContactContainer/Contact'
 
 export default function Chat()
 {
