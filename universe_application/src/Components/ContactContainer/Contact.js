@@ -1,9 +1,28 @@
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import "./Contact.css"
 
 export default function Contact()
 {
+    const [information, setInformation] = useState({});
+    useEffect(() => {
+        const fetchAuthentication = async () => {
+            const response = await axios.post('http://localhost:3001/auth/login/',
+            {
+                email: "sk@gmail.com",
+                password: "helloworld"
+            })
+            const responseData = response.data;
+            setInformation(responseData);
+        }
+        fetchAuthentication();
+    },[]);
+
+    useEffect(()=>{
+        console.log(information);
+    }, [information])
+
     return (
         <div className = "mainContactContainer">
             <div>
@@ -14,59 +33,11 @@ export default function Contact()
                     <div className="userContainer">
                         <img src="" alt=""/>
                             <div>
-                                <p className="userDetail">Sumankd</p>
+                                <p className="userDetail"> {information.user._id} </p>
                                 <p className="userDetail">Open your message</p>
                             </div>
                     </div>
-                    <div className="userContainer">
-                        <img src="" alt=""/>
-                            <div>
-                                <p className="userDetail">Sumankd</p>
-                                <p className="userDetail">Open your message</p>
-                            </div>
-                    </div>
-                    <div className="userContainer">
-                        <img src="" alt=""/>
-                            <div>
-                                <p className="userDetail">Sumankd</p>
-                                <p className="userDetail">Open your message</p>
-                            </div>
-                    </div>
-                    <div className="userContainer">
-                        <img src="" alt=""/>
-                            <div>
-                                <p className="userDetail">Sumankd</p>
-                                <p className="userDetail">Open your message</p>
-                            </div>
-                    </div>
-                    <div className="userContainer">
-                        <img src="" alt=""/>
-                            <div>
-                                <p className="userDetail">Sumankd</p>
-                                <p className="userDetail">Open your message</p>
-                            </div>
-                    </div>
-                    <div className="userContainer">
-                        <img src="" alt=""/>
-                            <div>
-                                <p className="userDetail">Sumankd</p>
-                                <p className="userDetail">Open your message</p>
-                            </div>
-                    </div>
-                    <div className="userContainer">
-                        <img src="" alt=""/>
-                            <div>
-                                <p className="userDetail">Sumankd</p>
-                                <p className="userDetail">Open your message</p>
-                            </div>
-                    </div>
-                    <div className="userContainer">
-                        <img src="" alt=""/>
-                            <div>
-                                <p className="userDetail">Sumankd</p>
-                                <p className="userDetail">Open your message</p>
-                            </div>
-                    </div>
+                   
 
                 </div>
             </div>
