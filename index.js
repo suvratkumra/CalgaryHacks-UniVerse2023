@@ -10,8 +10,13 @@ import { fileURLToPath } from "url";
 import path from "path";
 // register endpoint
 import authRoutes from "./routes/auth.js";
+import userRoutes from "./routes/users.js";
+//import postRoutes from "./routes/posts.js";
 import { register } from "./controllers/auth.js";
 import Message from "./models/Message.js";
+//import { createPost } from "./controllers/posts.js";
+import { verifyToken } from "./middleware/auth.js";
+import { create } from "domain";
 
 /*CONFIGURATIONS
 -----------------
@@ -59,6 +64,7 @@ auth route = upload picture directly into assests folder (middleware)
 DO NOT MOVE AUTH ROUTE INTO ROUTE FILE NEED UPLOAD VARIABLE 
 */
 app.post("/auth/register", upload.single("picture"), register);
+//app.post("/posts", verifyToken, upload.single("picture"), createPost);
 
 /*ROUTER
 ------------- 
@@ -129,6 +135,9 @@ app.get("/get/chat/msg/:user1Id/:user2Id", async (req, res) => {
 // socketIO.on('connection', (socket) => {
 // 	console.log(``)
 // })
+
+app.use("/users", userRoutes);
+//app.use("/posts", postRoutes);
 
 /*
 MONGOOSE SETUP 
