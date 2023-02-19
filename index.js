@@ -13,6 +13,7 @@ import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
 //import postRoutes from "./routes/posts.js";
 import { register } from "./controllers/auth.js";
+import Message from "./models/Message.js";
 //import { createPost } from "./controllers/posts.js";
 import { verifyToken } from "./middleware/auth.js";
 import { create } from "domain";
@@ -58,7 +59,7 @@ const upload = multer({ storage });
 --------------------
 routes occure in order of code 
 auth route = upload picture directly into assests folder (middleware)
-             will happedn after route and before login code (register endpoint)
+			 will happedn after route and before login code (register endpoint)
 
 DO NOT MOVE AUTH ROUTE INTO ROUTE FILE NEED UPLOAD VARIABLE 
 */
@@ -70,8 +71,74 @@ app.post("/auth/register", upload.single("picture"), register);
 setup routes for authorization routes endpoints
 */
 app.use("/auth", authRoutes);
+
+
+/**
+ *  Chat Feature backend
+ */
+app.get('/api', (req, res) => {
+	res.json({
+		message: 'Bhenchod World',
+	});
+});
+
+app.post("/msg", async (req, res) => {
+	try {
+		const { from, to, message } = req.body;
+		const newmessage = await Message.create({
+			message: message,
+			Chatusers: [from, to],
+			sender: from
+		})
+
+		return res.status(200).json(newmessage);
+	}
+	catch (error) {
+		return res.status(500).json("Internal Server Error");
+	}
+});
+
+app.get("/get/chat/msg/:user1Id/:user2Id", async (req, res) => {
+	try {
+		const from = req.params.user1Id;
+		const to = req.params.user2Id;
+		const newmessage = await Message.find({
+			Chatusers: {
+				$all:[from, to],
+
+			}
+		}).sort({updatedAt:-1});
+
+		const allmessage = newmessage.map((msg)=>{
+			return {
+				myself:msg.sender.toString() === from,
+				message : msg.message
+			}
+		})
+
+		return res.status(200).json(allmessage);
+	}
+	catch (error) {
+		return res.status(500).json("Internal Server Error");
+	}
+});
+
+/**
+ * Socket IO
+ */
+// const socketIO = require('socket.io')(http, {
+// 	cors: {
+// 		origin: "http://localhost:4000"
+// 	}
+// });
+
+// socketIO.on('connection', (socket) => {
+// 	console.log(``)
+// })
+
 app.use("/users", userRoutes);
 //app.use("/posts", postRoutes);
+
 /*
 MONGOOSE SETUP 
 ---------------
