@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import "./Login.css"
-
+import logo from "../../logo.png"
 
 export default function Login() {
     const [emailID, setEmailID] = useState('');
@@ -37,27 +37,38 @@ export default function Login() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Email:
-                <input
-                    type="text"
-                    value={emailID}
-                    onChange={handleEmailChange}
-                />
-            </label>
-            <br />
-            <label>
-                Password:
-                <input
-                    type="password"
-                    value={password}
-                    onChange={handlePasswordChange}
-                />
-            </label>
-            <br />
-            <button type="submit" disabled={!isFormValid}>Log in</button>
-
-        </form>
+        <div className="container">
+            <div className="form-wrapper">
+                <form onSubmit={handleSubmit}>
+                    <img src={logo} alt="Logo" className="logo-image" />
+                    <label>
+                        <input
+                            placeholder='Email or Username'
+                            type="text"
+                            value={emailID}
+                            onChange={handleEmailChange}
+                            className="input_text"
+                        />
+                    </label>
+                    <br />
+                    <label>
+                        <input
+                            placeholder='Password'
+                            type="password"
+                            value={password}
+                            onChange={handlePasswordChange}
+                        />
+                    </label>
+                    <br />
+                    <div className="button-container">
+                        <button type="submit" disabled={!isFormValid}> Log In</button>
+                        <label className="button-label">
+                        <br/> Don't have an account? Create one <span id = "here"> <u>here</u></span> 
+                        </label>
+                    </div>    
+                </form>
+              
+            </div>
+        </div>
     )
 }
